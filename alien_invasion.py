@@ -23,7 +23,7 @@ class AlienInvasion:
             self._update_screen()
             
     def _check_events(self):
-            '''"""Respond to keypresses and mouse events."""'''
+            '''Respond to keypresses and mouse events.'''
             for event in pygame.event.get():     # it's an event loop
                 if event.type == pygame.QUIT:    # event is an action that the user performs
                     sys.exit()
@@ -35,7 +35,7 @@ class AlienInvasion:
             self.ship.blitme()
 
             # make the most recently drawn screen visible.
-            pygame.display.flip()
+            pygame.display.flip()    # This will update the contents of the entire display
 
 
 if __name__ == '__main__':
