@@ -19,6 +19,7 @@ class AlienInvasion:
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
         self.aliens = pygame.sprite.Group()
+        self._create_fleet()
 
     def run_game(self):    # controls the game
         '''start the main loop for the game.'''
@@ -27,7 +28,7 @@ class AlienInvasion:
             self._check_events()
             self.ship.update()
             self._update_bullets()
-            self._create_fleet()
+            self._update_aliens()
             self._update_screen()
 
     def _create_fleet(self):
@@ -45,10 +46,22 @@ class AlienInvasion:
         number_rows = available_space_y // (2 * alien_height)
         
         # create the first row of aliens
-        for row_number in range (number_rows):
+        for row_number in range (number_rows - 10):
             alien.y = alien_height + 2 * alien_height * row_number
             for alien_number in range(number_aliens_X + 1):
                 self._create_alien(alien_number, row_number)
+
+    def _check_fleet_edges(self):
+        """Respond appropriately if any aliens have reached an edge."""
+        for alien in self.aliens.sprites():
+            if alien.check_edge():
+                self._change_fleet_direction()
+                break
+
+    def _change_fleet_direction(self):
+        for alien in self.aliens.sprites():
+            alien.rect.y += self.settings.fleet_drop_speed
+        self.settings.fleet_direction *= -1
             
 
     def _create_alien(self, alien_number, row_number):
@@ -59,8 +72,16 @@ class AlienInvasion:
         alien.rect.x = alien.x
         alien.rect.y = alien_height + 2 * alien_height * row_number
         self.aliens.add(alien) 
+
+    def _update_aliens (self):
+        """
+        Check if the fleet is at an edge,
+        then update the positions of all aliens in the fleet.
+        """
+        self._check_fleet_edges()
+        '''update the position of all aliens in the fleet'''
+        self.aliens.update()
             
-    
     def _update_bullets (self):
         self.bullets.update()
             #get rid of bullets that have disappeared
