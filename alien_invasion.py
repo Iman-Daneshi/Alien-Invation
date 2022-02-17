@@ -1,4 +1,5 @@
 import sys
+from tkinter import S
 import pygame
 from time import sleep
 from settings import Settings
@@ -7,6 +8,8 @@ from game_stats import GameState
 from bullet import Bullet
 from alien import Alien
 from button import Button
+from scoreboard import ScoreBoard
+
 class AlienInvasion:
     '''overall class to manage game assets and behavior.'''
     def __init__(self):
@@ -26,6 +29,9 @@ class AlienInvasion:
         self._create_fleet()
         # make the play button
         self.play_button = Button(self,"play")
+        # Create an instance to store game statistics,
+        # and create a scoreboard.
+        self.sb = ScoreBoard(self)
 
     def run_game(self):    # controls the game
         '''start the main loop for the game.'''
@@ -53,7 +59,7 @@ class AlienInvasion:
         number_rows = available_space_y // (3 * alien_height)
         
         # create the first row of aliens
-        for row_number in range (number_rows - 5):
+        for row_number in range (number_rows - 6):
             alien.y = alien_height + 3 * alien_height * row_number
             for alien_number in range(number_aliens_X + 1):
                 self._create_alien(alien_number, row_number)
@@ -77,7 +83,7 @@ class AlienInvasion:
         alien_width , alien_height = alien.rect.size
         alien.x = 2 * alien_width + 2 * alien_width * alien_number
         alien.rect.x = alien.x
-        alien.rect.y = alien_height + 3 * alien_height * row_number
+        alien.rect.y = 2 * alien_height + 3 * alien_height * row_number
         self.aliens.add(alien) 
 
     def _update_aliens (self):
@@ -206,6 +212,8 @@ class AlienInvasion:
             self.aliens.draw(self.screen)
             if not self.stats.game_active:
                 self.play_button._draw_button()
+            # Draw the score information.
+            self.sb.show_score()
             # make the most recently drawn screen visible.
             pygame.display.flip()    # This will update the contents of the entire display
 
