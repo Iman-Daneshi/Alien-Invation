@@ -13,6 +13,17 @@ class ScoreBoard():
         self.font = pygame.font.SysFont(None,48)
         # Prepare the initial score image.
         self.prep_score()
+        self.prep_high_score()
+
+    def prep_high_score(self):
+        """Turn the high score into a rendered image."""
+        rounded_high_score = round(self.stats.high_score, -1)
+        high_score_str = f"{rounded_high_score:,}"
+        self.high_score_image = self.font.render(high_score_str, True, 
+                        self.text_color, self.settings.bg_color)
+        # place the high score at the top middle of the screen
+        self.high_score_image_rect = self.high_score_image.get_rect()
+        self.high_score_image_rect.midtop = self.screen_rect.midtop
 
     def prep_score(self):
         """Turn the score into a rendered image."""
@@ -27,3 +38,9 @@ class ScoreBoard():
     def show_score(self):
         '''draw the score to the screen.'''
         self.screen.blit(self.score_image, self.score_rect)
+        self.screen.blit(self.high_score_image, self.high_score_image_rect)
+    
+    def check_high_score(self):
+        if (self.stats.score >= self.stats.high_score):
+            self.stats.high_score = self.stats.score
+            self.prep_high_score()
