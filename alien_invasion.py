@@ -138,6 +138,7 @@ class AlienInvasion:
             # Destroy existing bullets and create new fleet.
             self.bullets.empty()
             self._create_fleet()
+            self.settings.increase_speed()
             
     def _check_events(self):
             '''Respond to keypresses and mouse events.'''
