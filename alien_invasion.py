@@ -153,7 +153,8 @@ class AlienInvasion:
     
     def _check_play_button(self, mouse_pos):
         '''start a new game when the mouse click play button'''
-        if self.play_button.rect.collidepoint(mouse_pos):
+        button_clicked = self.play_button.rect.collidepoint(mouse_pos)
+        if button_clicked and not self.stats.game_active:
             # reset the game statistics
             self.stats.reset_stats()
             self.stats.game_active = True
@@ -163,7 +164,7 @@ class AlienInvasion:
             # create a new fleet and center the ship
             self._create_fleet()
             self.ship.center_ship()
-            
+
     def _check_keydown_events (self, event):
         if event.key == pygame.K_RIGHT:
             # take the ship to the right
