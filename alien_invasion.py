@@ -1,5 +1,4 @@
 import sys
-from tkinter import S
 import pygame
 from time import sleep
 from settings import Settings
