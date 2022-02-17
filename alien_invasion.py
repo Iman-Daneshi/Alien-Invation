@@ -60,7 +60,7 @@ class AlienInvasion:
         
         # create the first row of aliens
         for row_number in range (number_rows - 6):
-            alien.y = alien_height + 3 * alien_height * row_number
+            alien.y = 2 * alien_height + 3 * alien_height * row_number
             for alien_number in range(number_aliens_X + 1):
                 self._create_alien(alien_number, row_number)
 
@@ -83,7 +83,7 @@ class AlienInvasion:
         alien_width , alien_height = alien.rect.size
         alien.x = 2 * alien_width + 2 * alien_width * alien_number
         alien.rect.x = alien.x
-        alien.rect.y = 2 * alien_height + 3 * alien_height * row_number
+        alien.rect.y = 4 * alien_height + 3 * alien_height * row_number
         self.aliens.add(alien) 
 
     def _update_aliens (self):
