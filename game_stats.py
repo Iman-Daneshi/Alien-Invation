@@ -13,4 +13,5 @@ class GameState:
         """Initialize statistics that can change during the game."""
         self.ships_left = self.settings.ship_limits
         self.score = 0
+        self.level = 1
 
