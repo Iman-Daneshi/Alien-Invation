@@ -17,7 +17,7 @@ class Alien (Sprite):
         self.rect.y = self.rect.height
         
         # store the alien's exact horizental position
-        self.x = self.rect.x
+        self.x = float(self.rect.x)
         
 
     def update(self):
