@@ -56,11 +56,15 @@ class Button:
         # Draw blank button and then draw message.
         if msg == 'Play':
             self.screen.fill(self.play_color, self.rect)
+            self.screen.blit(self.msg_image, self.msg_image_rect)
         elif msg == 'Easy':
             self.screen.fill(self.easy_color, self.rect)
+            self.screen.blit(self.msg_image, self.msg_image_rect)
         elif msg == 'Normal':
             self.screen.fill(self.normal_color, self.rect)
+            self.screen.blit(self.msg_image, self.msg_image_rect)
         elif msg == 'Hard':
             self.screen.fill(self.hard_color, self.rect)
+            self.screen.blit(self.msg_image, self.msg_image_rect)
+
     
-        self.screen.blit(self.msg_image, self.msg_image_rect)
