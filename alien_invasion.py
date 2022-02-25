@@ -139,10 +139,14 @@ class AlienInvasion:
         """Respond to bullet-alien collisions."""
         # Remove any bullets and aliens that have collided.
         collisions = pygame.sprite.groupcollide(
-                        self.bullets, self.aliens, True, True)
+                        self.aliens, self.bullets, False, True)
         if collisions:
-            for aliens in collisions.values():
-                self.stats.score += self.settings.alien_points * len (aliens)
+            for alien in collisions.keys():
+                self.stats.score += self.settings.alien_points 
+                self.settings.shooted_aliens_list.append(alien)
+                if self.settings.shooted_aliens_list.count(alien) == self.settings.alien_kills:
+                    self.aliens.remove(alien)
+    
             self.sb.prep_score()
             self.sb.check_high_score()
         if not self.aliens:
