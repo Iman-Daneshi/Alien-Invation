@@ -29,6 +29,8 @@ class Button:
             self.button_color = (255,255,0)
         elif msg == 'Hard':
             self.button_color = (255,0,0)
+        elif msg == 'Play':
+            self.button_color = (0,0,0)
         
 
 
@@ -37,12 +39,15 @@ class Button:
         self.rect = pygame.Rect(0, 0, self.width, self.height)
         if msg == 'Normal':
             self.rect.center = self.screen_rect.center
+            self.rect.centery = self.screen_rect.centery + self.rect.height + 10
         elif msg == 'Easy':
             self.rect.centerx = self.screen_rect.centerx - self.rect.width -10
-            self.rect.centery = self.screen_rect.centery
+            self.rect.centery = self.screen_rect.centery + self.rect.height + 10
         elif msg == 'Hard':
             self.rect.centerx = self.screen_rect.centerx + self.rect.width +10
-            self.rect.centery = self.screen_rect.centery
+            self.rect.centery = self.screen_rect.centery + self.rect.height + 10
+        elif msg == 'Play':
+             self.rect.center = self.screen_rect.center
 
         
         
